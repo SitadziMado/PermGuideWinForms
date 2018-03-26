@@ -1,0 +1,814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PermGuide.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="PermGuideStoreContainer">
+    <EntitySet Name="UserSet" EntityType="PermGuide.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReviewSet" EntityType="PermGuide.Store.ReviewSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MediaFileSet" EntityType="PermGuide.Store.MediaFileSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RegionSet" EntityType="PermGuide.Store.RegionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TimetableSet" EntityType="PermGuide.Store.TimetableSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentSet" EntityType="PermGuide.Store.ContentSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentSet_Sight" EntityType="PermGuide.Store.ContentSet_Sight" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentSet_Article" EntityType="PermGuide.Store.ContentSet_Article" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContentSet_Excursion" EntityType="PermGuide.Store.ContentSet_Excursion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ArticleFile" EntityType="PermGuide.Store.ArticleFile" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ExcursionSight" EntityType="PermGuide.Store.ExcursionSight" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserReview" Association="PermGuide.Store.UserReview">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Review" EntitySet="ReviewSet" />
+    </AssociationSet>
+    <AssociationSet Name="RegionSight" Association="PermGuide.Store.RegionSight">
+      <End Role="Region" EntitySet="RegionSet" />
+      <End Role="Sight" EntitySet="ContentSet_Sight" />
+    </AssociationSet>
+    <AssociationSet Name="UserTimetable" Association="PermGuide.Store.UserTimetable">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Timetable" EntitySet="TimetableSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleFile_Article" Association="PermGuide.Store.FK_ArticleFile_Article">
+      <End Role="Article" EntitySet="ContentSet_Article" />
+      <End Role="ArticleFile" EntitySet="ArticleFile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleFile_File" Association="PermGuide.Store.FK_ArticleFile_File">
+      <End Role="File" EntitySet="MediaFileSet" />
+      <End Role="ArticleFile" EntitySet="ArticleFile" />
+    </AssociationSet>
+    <AssociationSet Name="SightArticle" Association="PermGuide.Store.SightArticle">
+      <End Role="Sight" EntitySet="ContentSet_Sight" />
+      <End Role="Article" EntitySet="ContentSet_Article" />
+    </AssociationSet>
+    <AssociationSet Name="RegionArticle" Association="PermGuide.Store.RegionArticle">
+      <End Role="Region" EntitySet="RegionSet" />
+      <End Role="Article" EntitySet="ContentSet_Article" />
+    </AssociationSet>
+    <AssociationSet Name="ExcursionArticle" Association="PermGuide.Store.ExcursionArticle">
+      <End Role="Excursion" EntitySet="ContentSet_Excursion" />
+      <End Role="Article" EntitySet="ContentSet_Article" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExcursionSight_Excursion" Association="PermGuide.Store.FK_ExcursionSight_Excursion">
+      <End Role="Excursion" EntitySet="ContentSet_Excursion" />
+      <End Role="ExcursionSight" EntitySet="ExcursionSight" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExcursionSight_Sight" Association="PermGuide.Store.FK_ExcursionSight_Sight">
+      <End Role="Sight" EntitySet="ContentSet_Sight" />
+      <End Role="ExcursionSight" EntitySet="ExcursionSight" />
+    </AssociationSet>
+    <AssociationSet Name="UserRecordFileRecord" Association="PermGuide.Store.UserRecordFileRecord">
+      <End Role="UserRecord" EntitySet="UserSet" />
+      <End Role="FileRecord" EntitySet="MediaFileSet" />
+    </AssociationSet>
+    <AssociationSet Name="ContentRecordReviewRecord" Association="PermGuide.Store.ContentRecordReviewRecord">
+      <End Role="ContentRecord" EntitySet="ContentSet" />
+      <End Role="ReviewRecord" EntitySet="ReviewSet" />
+    </AssociationSet>
+    <AssociationSet Name="UserRecordContentRecord" Association="PermGuide.Store.UserRecordContentRecord">
+      <End Role="UserRecord" EntitySet="UserSet" />
+      <End Role="ContentRecord" EntitySet="ContentSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sight_inherits_Content" Association="PermGuide.Store.FK_Sight_inherits_Content">
+      <End Role="Content" EntitySet="ContentSet" />
+      <End Role="Sight" EntitySet="ContentSet_Sight" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Article_inherits_Content" Association="PermGuide.Store.FK_Article_inherits_Content">
+      <End Role="Content" EntitySet="ContentSet" />
+      <End Role="Article" EntitySet="ContentSet_Article" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Excursion_inherits_Content" Association="PermGuide.Store.FK_Excursion_inherits_Content">
+      <End Role="Content" EntitySet="ContentSet" />
+      <End Role="Excursion" EntitySet="ContentSet_Excursion" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nickname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="BanStatus_IsBanned" Type="bit" Nullable="false" />
+    <Property Name="BanStatus_BannedTill" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReviewSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="Mark" Type="int" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Content_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MediaFileSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uri" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MediaType" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RegionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TimetableSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="Activities" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContentSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProposalStatus" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContentSet_Sight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Region_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ContentSet_Article">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Sight_Id" Type="int" Nullable="true" />
+    <Property Name="Region_Id" Type="int" Nullable="true" />
+    <Property Name="Excursion_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ContentSet_Excursion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArticleFile">
+    <Key>
+      <PropertyRef Name="Article_Id" />
+      <PropertyRef Name="File_Id" />
+    </Key>
+    <Property Name="Article_Id" Type="int" Nullable="false" />
+    <Property Name="File_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExcursionSight">
+    <Key>
+      <PropertyRef Name="Excursion_Id" />
+      <PropertyRef Name="Sight_Id" />
+    </Key>
+    <Property Name="Excursion_Id" Type="int" Nullable="false" />
+    <Property Name="Sight_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserReview">
+    <End Role="User" Type="PermGuide.Store.UserSet" Multiplicity="1" />
+    <End Role="Review" Type="PermGuide.Store.ReviewSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RegionSight">
+    <End Role="Region" Type="PermGuide.Store.RegionSet" Multiplicity="0..1" />
+    <End Role="Sight" Type="PermGuide.Store.ContentSet_Sight" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sight">
+        <PropertyRef Name="Region_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserTimetable">
+    <End Role="User" Type="PermGuide.Store.UserSet" Multiplicity="1" />
+    <End Role="Timetable" Type="PermGuide.Store.TimetableSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Timetable">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SightArticle">
+    <End Role="Sight" Type="PermGuide.Store.ContentSet_Sight" Multiplicity="0..1" />
+    <End Role="Article" Type="PermGuide.Store.ContentSet_Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sight">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="Sight_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RegionArticle">
+    <End Role="Region" Type="PermGuide.Store.RegionSet" Multiplicity="0..1" />
+    <End Role="Article" Type="PermGuide.Store.ContentSet_Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="Region_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExcursionArticle">
+    <End Role="Excursion" Type="PermGuide.Store.ContentSet_Excursion" Multiplicity="0..1" />
+    <End Role="Article" Type="PermGuide.Store.ContentSet_Article" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Excursion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="Excursion_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRecordFileRecord">
+    <End Role="UserRecord" Type="PermGuide.Store.UserSet" Multiplicity="1" />
+    <End Role="FileRecord" Type="PermGuide.Store.MediaFileSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRecord">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FileRecord">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContentRecordReviewRecord">
+    <End Role="ContentRecord" Type="PermGuide.Store.ContentSet" Multiplicity="1" />
+    <End Role="ReviewRecord" Type="PermGuide.Store.ReviewSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContentRecord">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReviewRecord">
+        <PropertyRef Name="Content_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRecordContentRecord">
+    <End Role="UserRecord" Type="PermGuide.Store.UserSet" Multiplicity="1" />
+    <End Role="ContentRecord" Type="PermGuide.Store.ContentSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRecord">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContentRecord">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleFile_Article">
+    <End Role="Article" Type="PermGuide.Store.ContentSet_Article" Multiplicity="1" />
+    <End Role="ArticleFile" Type="PermGuide.Store.ArticleFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleFile">
+        <PropertyRef Name="Article_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleFile_File">
+    <End Role="ArticleFile" Type="PermGuide.Store.ArticleFile" Multiplicity="*" />
+    <End Role="File" Type="PermGuide.Store.MediaFileSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="File">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleFile">
+        <PropertyRef Name="File_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExcursionSight_Excursion">
+    <End Role="Excursion" Type="PermGuide.Store.ContentSet_Excursion" Multiplicity="1" />
+    <End Role="ExcursionSight" Type="PermGuide.Store.ExcursionSight" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Excursion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExcursionSight">
+        <PropertyRef Name="Excursion_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExcursionSight_Sight">
+    <End Role="ExcursionSight" Type="PermGuide.Store.ExcursionSight" Multiplicity="*" />
+    <End Role="Sight" Type="PermGuide.Store.ContentSet_Sight" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Sight">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExcursionSight">
+        <PropertyRef Name="Sight_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sight_inherits_Content">
+    <End Role="Content" Type="PermGuide.Store.ContentSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sight" Type="PermGuide.Store.ContentSet_Sight" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sight">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Article_inherits_Content">
+    <End Role="Content" Type="PermGuide.Store.ContentSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Article" Type="PermGuide.Store.ContentSet_Article" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Article">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Excursion_inherits_Content">
+    <End Role="Content" Type="PermGuide.Store.ContentSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Excursion" Type="PermGuide.Store.ContentSet_Excursion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Content">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Excursion">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="PermGuide" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="PermGuideContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserSet" EntityType="PermGuide.User" />
+          <EntitySet Name="ReviewSet" EntityType="PermGuide.Review" />
+          <EntitySet Name="MediaFileSet" EntityType="PermGuide.MediaFile" />
+          <EntitySet Name="RegionSet" EntityType="PermGuide.Region" />
+          <EntitySet Name="TimetableSet" EntityType="PermGuide.Timetable" />
+          <AssociationSet Name="UserReview" Association="PermGuide.UserReview">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Review" EntitySet="ReviewSet" />
+          </AssociationSet>
+          <AssociationSet Name="RegionSight" Association="PermGuide.RegionSight">
+            <End Role="Region" EntitySet="RegionSet" />
+            <End Role="Sight" EntitySet="ContentSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserTimetable" Association="PermGuide.UserTimetable">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Timetable" EntitySet="TimetableSet" />
+          </AssociationSet>
+          <AssociationSet Name="ArticleFile" Association="PermGuide.ArticleFile">
+            <End EntitySet="ContentSet" Role="Article" />
+            <End EntitySet="MediaFileSet" Role="File" />
+          </AssociationSet>
+          <AssociationSet Name="SightArticle" Association="PermGuide.SightArticle">
+            <End EntitySet="ContentSet" Role="Sight" />
+            <End EntitySet="ContentSet" Role="Article" />
+          </AssociationSet>
+          <AssociationSet Name="RegionArticle" Association="PermGuide.RegionArticle">
+            <End EntitySet="RegionSet" Role="Region" />
+            <End EntitySet="ContentSet" Role="Article" />
+          </AssociationSet>
+          <AssociationSet Name="ExcursionArticle" Association="PermGuide.ExcursionArticle">
+            <End EntitySet="ContentSet" Role="Excursion" />
+            <End EntitySet="ContentSet" Role="Article" />
+          </AssociationSet>
+          <AssociationSet Name="ExcursionSight" Association="PermGuide.ExcursionSight">
+            <End Role="Excursion" EntitySet="ContentSet" />
+            <End Role="Sight" EntitySet="ContentSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserRecordFileRecord" Association="PermGuide.UserRecordFileRecord">
+            <End Role="UserRecord" EntitySet="UserSet" />
+            <End Role="FileRecord" EntitySet="MediaFileSet" />
+          </AssociationSet>
+          <EntitySet Name="ContentSet" EntityType="PermGuide.Content" />
+          <AssociationSet Name="ContentRecordReviewRecord" Association="PermGuide.ContentRecordReviewRecord">
+            <End Role="ContentRecord" EntitySet="ContentSet" />
+            <End Role="ReviewRecord" EntitySet="ReviewSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserRecordContentRecord" Association="PermGuide.UserRecordContentRecord">
+            <End Role="UserRecord" EntitySet="UserSet" />
+            <End Role="ContentRecord" EntitySet="ContentSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Documentation>
+            <Summary>Класс пользователя системы учета достопримечательностей Перми и Пермского края.</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Private" cg:GetterAccess="Private" />
+          <Property Name="Login" Type="String" Nullable="false" cg:SetterAccess="Private" cg:GetterAccess="Public" />
+          <Property Name="Password" Type="String" Nullable="false" cg:SetterAccess="Private" />
+          <Property Name="Nickname" Type="String" Nullable="false" cg:SetterAccess="Public" />
+          <NavigationProperty Name="Review" Relationship="PermGuide.UserReview" FromRole="User" ToRole="Review" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Timetable" Relationship="PermGuide.UserTimetable" FromRole="User" ToRole="Timetable" cg:SetterAccess="Private" />
+          <Property Name="Status" Type="PermGuide.UserStatus" Nullable="false" cg:SetterAccess="Private" />
+          <NavigationProperty Name="File" Relationship="PermGuide.UserRecordFileRecord" FromRole="UserRecord" ToRole="FileRecord" cg:SetterAccess="Private" />
+          <Property Name="BanStatus" Type="PermGuide.BanStatus" Nullable="false" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Content" Relationship="PermGuide.UserRecordContentRecord" FromRole="UserRecord" ToRole="ContentRecord" cg:SetterAccess="Private" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Documentation>
+            <Summary>Класс отзыва о достопримечательности или экскурсии.</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Private" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" cg:SetterAccess="Public" />
+          <Property Name="Mark" Type="Int32" Nullable="false" cg:SetterAccess="Public" />
+          <NavigationProperty Name="User" Relationship="PermGuide.UserReview" FromRole="Review" ToRole="User" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Content" Relationship="PermGuide.ContentRecordReviewRecord" FromRole="ReviewRecord" ToRole="ContentRecord" cg:SetterAccess="Private" />
+          <Property Name="Text" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Private" />
+          <Property Name="Uri" Type="String" Nullable="false" cg:SetterAccess="Private" />
+          <Property Name="MediaType" Type="PermGuide.MediaType" Nullable="false" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Article" Relationship="PermGuide.ArticleFile" FromRole="File" ToRole="Article" cg:SetterAccess="Private" />
+          <NavigationProperty Name="User" Relationship="PermGuide.UserRecordFileRecord" FromRole="FileRecord" ToRole="UserRecord" cg:SetterAccess="Private" />
+        </EntityType>
+        <EntityType Name="Sight" BaseType="PermGuide.Content">
+          <Documentation>
+            <Summary>Класс, хранящий информацию о достопримечательности.</Summary>
+          </Documentation>
+          <NavigationProperty Name="Region" Relationship="PermGuide.RegionSight" FromRole="Sight" ToRole="Region" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Article" Relationship="PermGuide.SightArticle" FromRole="Sight" ToRole="Article" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Excursion" Relationship="PermGuide.ExcursionSight" FromRole="Sight" ToRole="Excursion" cg:SetterAccess="Private" />
+          <Property Name="Location" Type="String" Nullable="false" cg:SetterAccess="Private" />
+          <Property Name="Address" Type="String" Nullable="false" cg:SetterAccess="Private" />
+        </EntityType>
+        <EntityType Name="Article" BaseType="PermGuide.Content">
+          <NavigationProperty Name="File" Relationship="PermGuide.ArticleFile" FromRole="Article" ToRole="File" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Sight" Relationship="PermGuide.SightArticle" FromRole="Article" ToRole="Sight" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Region" Relationship="PermGuide.RegionArticle" FromRole="Article" ToRole="Region" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Excursion" Relationship="PermGuide.ExcursionArticle" FromRole="Article" ToRole="Excursion" cg:SetterAccess="Private" />
+        </EntityType>
+        <EntityType Name="Excursion" BaseType="PermGuide.Content">
+          <NavigationProperty Name="Article" Relationship="PermGuide.ExcursionArticle" FromRole="Excursion" ToRole="Article" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Sight" Relationship="PermGuide.ExcursionSight" FromRole="Excursion" ToRole="Sight" cg:SetterAccess="Private" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Sight" Relationship="PermGuide.RegionSight" FromRole="Region" ToRole="Sight" cg:SetterAccess="Private" />
+          <NavigationProperty Name="Article" Relationship="PermGuide.RegionArticle" FromRole="Region" ToRole="Article" cg:SetterAccess="Private" />
+          <Property Name="Name" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Private" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" cg:SetterAccess="Private" />
+          <NavigationProperty Name="User" Relationship="PermGuide.UserTimetable" FromRole="Timetable" ToRole="User" cg:SetterAccess="Private" />
+          <Property Name="Activities" Type="String" Nullable="false" cg:SetterAccess="Private" />
+        </EntityType>
+        <Association Name="UserReview">
+          <End Type="PermGuide.User" Role="User" Multiplicity="1" />
+          <End Type="PermGuide.Review" Role="Review" Multiplicity="*" />
+        </Association>
+        <Association Name="RegionSight">
+          <End Type="PermGuide.Region" Role="Region" Multiplicity="0..1" />
+          <End Type="PermGuide.Sight" Role="Sight" Multiplicity="*" />
+        </Association>
+        <Association Name="UserTimetable">
+          <End Type="PermGuide.User" Role="User" Multiplicity="1" />
+          <End Type="PermGuide.Timetable" Role="Timetable" Multiplicity="*" />
+        </Association>
+        <Association Name="ArticleFile">
+          <End Type="PermGuide.Article" Multiplicity="*" Role="Article" />
+          <End Type="PermGuide.MediaFile" Multiplicity="*" Role="File" />
+        </Association>
+        <Association Name="SightArticle">
+          <End Type="PermGuide.Sight" Multiplicity="0..1" Role="Sight" />
+          <End Type="PermGuide.Article" Multiplicity="0..1" Role="Article" />
+        </Association>
+        <Association Name="RegionArticle">
+          <End Type="PermGuide.Region" Multiplicity="0..1" Role="Region" />
+          <End Type="PermGuide.Article" Multiplicity="0..1" Role="Article" />
+        </Association>
+        <Association Name="ExcursionArticle">
+          <End Type="PermGuide.Excursion" Multiplicity="0..1" Role="Excursion" />
+          <End Type="PermGuide.Article" Multiplicity="0..1" Role="Article" />
+        </Association>
+        <Association Name="ExcursionSight">
+          <End Type="PermGuide.Excursion" Role="Excursion" Multiplicity="*" />
+          <End Type="PermGuide.Sight" Role="Sight" Multiplicity="*" />
+        </Association>
+        <Association Name="UserRecordFileRecord">
+          <End Type="PermGuide.User" Role="UserRecord" Multiplicity="1" />
+          <End Type="PermGuide.MediaFile" Role="FileRecord" Multiplicity="*" />
+        </Association>
+        <EnumType Name="UserStatus">
+          <Member Name="User" />
+          <Member Name="Moderator" />
+          <Member Name="Administrator" />
+        </EnumType>
+        <ComplexType Name="BanStatus" >
+          <Property Type="Boolean" Name="IsBanned" Nullable="false" />
+          <Property Type="DateTime" Name="BannedTill" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" cg:SetterAccess="Private" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Review" Relationship="PermGuide.ContentRecordReviewRecord" FromRole="ContentRecord" ToRole="ReviewRecord" cg:SetterAccess="Protected" />
+          <NavigationProperty Name="User" Relationship="PermGuide.UserRecordContentRecord" FromRole="ContentRecord" ToRole="UserRecord" cg:SetterAccess="Protected" />
+          <Property Name="ProposalStatus" Type="PermGuide.ProposalStatus" Nullable="false" cg:SetterAccess="Protected" />
+        </EntityType>
+        <Association Name="ContentRecordReviewRecord">
+          <End Type="PermGuide.Content" Role="ContentRecord" Multiplicity="1" />
+          <End Type="PermGuide.Review" Role="ReviewRecord" Multiplicity="*" />
+        </Association>
+        <Association Name="UserRecordContentRecord">
+          <End Type="PermGuide.User" Role="UserRecord" Multiplicity="1" />
+          <End Type="PermGuide.Content" Role="ContentRecord" Multiplicity="*" />
+        </Association>
+        <EnumType Name="ProposalStatus">
+          <Member Name="Added" />
+          <Member Name="Proposed" />
+          <Member Name="Rejected" />
+        </EnumType>
+        <EnumType Name="MediaType">
+          <Member Name="PlainText" />
+          <Member Name="Html" />
+          <Member Name="Image" />
+          <Member Name="Audio" />
+          <Member Name="Video" />
+          <Member Name="Other" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PermGuideStoreContainer" CdmEntityContainer="PermGuideContainer">
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PermGuide.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ComplexProperty Name="BanStatus" TypeName="PermGuide.BanStatus">
+            <ScalarProperty Name="IsBanned" ColumnName="BanStatus_IsBanned" />
+            <ScalarProperty Name="BannedTill" ColumnName="BanStatus_BannedTill" />
+          </ComplexProperty>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PermGuide.Review)">
+        <MappingFragment StoreEntitySet="ReviewSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Mark" ColumnName="Mark" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MediaFileSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PermGuide.MediaFile)">
+        <MappingFragment StoreEntitySet="MediaFileSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Uri" ColumnName="Uri" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PermGuide.Region)">
+        <MappingFragment StoreEntitySet="RegionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimetableSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PermGuide.Timetable)">
+        <MappingFragment StoreEntitySet="TimetableSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Activities" ColumnName="Activities" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PermGuide.Content)">
+        <MappingFragment StoreEntitySet="ContentSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ProposalStatus" ColumnName="ProposalStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(PermGuide.Sight)">
+        <MappingFragment StoreEntitySet="ContentSet_Sight">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(PermGuide.Article)">
+        <MappingFragment StoreEntitySet="ContentSet_Article">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(PermGuide.Excursion)">
+        <MappingFragment StoreEntitySet="ContentSet_Excursion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UserReview" TypeName="PermGuide.UserReview" StoreEntitySet="ReviewSet">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Review">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RegionSight" TypeName="PermGuide.RegionSight" StoreEntitySet="ContentSet_Sight">
+      <EndProperty Name="Region">
+        <ScalarProperty Name="Id" ColumnName="Region_Id" />
+      </EndProperty>
+      <EndProperty Name="Sight">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Region_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserTimetable" TypeName="PermGuide.UserTimetable" StoreEntitySet="TimetableSet">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="Timetable">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ArticleFile" TypeName="PermGuide.ArticleFile" StoreEntitySet="ArticleFile">
+      <EndProperty Name="Article">
+        <ScalarProperty Name="Id" ColumnName="Article_Id" />
+      </EndProperty>
+      <EndProperty Name="File">
+        <ScalarProperty Name="Id" ColumnName="File_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SightArticle" TypeName="PermGuide.SightArticle" StoreEntitySet="ContentSet_Article">
+      <EndProperty Name="Sight">
+        <ScalarProperty Name="Id" ColumnName="Sight_Id" />
+      </EndProperty>
+      <EndProperty Name="Article">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Sight_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RegionArticle" TypeName="PermGuide.RegionArticle" StoreEntitySet="ContentSet_Article">
+      <EndProperty Name="Region">
+        <ScalarProperty Name="Id" ColumnName="Region_Id" />
+      </EndProperty>
+      <EndProperty Name="Article">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Region_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExcursionArticle" TypeName="PermGuide.ExcursionArticle" StoreEntitySet="ContentSet_Article">
+      <EndProperty Name="Excursion">
+        <ScalarProperty Name="Id" ColumnName="Excursion_Id" />
+      </EndProperty>
+      <EndProperty Name="Article">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Excursion_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExcursionSight" TypeName="PermGuide.ExcursionSight" StoreEntitySet="ExcursionSight">
+      <EndProperty Name="Excursion">
+        <ScalarProperty Name="Id" ColumnName="Excursion_Id" />
+      </EndProperty>
+      <EndProperty Name="Sight">
+        <ScalarProperty Name="Id" ColumnName="Sight_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserRecordFileRecord" TypeName="PermGuide.UserRecordFileRecord" StoreEntitySet="MediaFileSet">
+      <EndProperty Name="UserRecord">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="FileRecord">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ContentRecordReviewRecord" TypeName="PermGuide.ContentRecordReviewRecord" StoreEntitySet="ReviewSet">
+      <EndProperty Name="ContentRecord">
+        <ScalarProperty Name="Id" ColumnName="Content_Id" />
+      </EndProperty>
+      <EndProperty Name="ReviewRecord">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserRecordContentRecord" TypeName="PermGuide.UserRecordContentRecord" StoreEntitySet="ContentSet">
+      <EndProperty Name="UserRecord">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="ContentRecord">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3416abf2bc624bc3b80b8b18d381b194" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="PermGuide.User" Width="1.5" PointX="1.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PermGuide.Review" Width="1.5" PointX="4.375" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PermGuide.MediaFile" Width="1.5" PointX="2.375" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PermGuide.Sight" Width="1.5" PointX="6.875" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PermGuide.Article" Width="1.5" PointX="5.875" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PermGuide.Excursion" Width="1.5" PointX="6.375" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PermGuide.Region" Width="1.5" PointX="9" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PermGuide.Timetable" Width="1.5" PointX="0.875" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PermGuide.Content" Width="1.5" PointX="3.75" PointY="14.75" IsExpanded="true" />
+        <InheritanceConnector EntityType="PermGuide.Sight" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="PermGuide.Article" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="PermGuide.Excursion" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.UserReview" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.RegionSight" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.UserTimetable" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.ArticleFile" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.SightArticle" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.RegionArticle" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.ExcursionArticle" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.ExcursionSight" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.UserRecordFileRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.ContentRecordReviewRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="PermGuide.UserRecordContentRecord" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
